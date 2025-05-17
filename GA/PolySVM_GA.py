@@ -9,7 +9,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # 1. VERİYİ OKU VE ÖN İŞLE
-df = pd.read_csv("../dataset.csv")  # Dosya yolu doğru mu kontrol et
+df = pd.read_csv("../dataset.csv")  
 
 # Kategorik değişkenleri sayısala çevir
 le_gender = LabelEncoder()
@@ -108,3 +108,16 @@ print(f"Recall:     {results['test_recall'].mean():.4f}")
 print(f"Specificity:{results['test_specificity'].mean():.4f}")
 print(f"F1 Score:   {results['test_f1'].mean():.4f}")
 print(f"MCC:        {results['test_mcc'].mean():.4f}")
+
+
+"""
+Polynomial SVM Modeli (GA ile Seçilen Özelliklerle - 10 Katlı CV)
+
+Accuracy:   0.7332
+Precision:  0.7216
+Recall:     0.7725
+Specificity:0.7725
+F1 Score:   0.7442
+MCC:        0.4704
+
+"""

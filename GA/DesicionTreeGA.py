@@ -7,7 +7,7 @@ from sklearn.metrics import make_scorer, accuracy_score, precision_score, recall
 from geneticalgorithm import geneticalgorithm as ga
 
 # 1. VERİYİ OKU VE ÖN İŞLE
-df = pd.read_csv("../dataset.csv")  # Dosya yolunu düzenle
+df = pd.read_csv("../dataset.csv")  
 
 # Kategorik değişkenleri sayısal hale getir
 le_gender = LabelEncoder()

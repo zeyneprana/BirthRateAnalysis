@@ -10,7 +10,7 @@ from geneticalgorithm import geneticalgorithm as ga
 from sklearn.preprocessing import LabelEncoder
 
 # 1. Veriyi oku
-df = pd.read_csv("../dataset.csv")  # Dosya yolunu gerektiği gibi değiştir
+df = pd.read_csv("../dataset.csv")  
 
 #Kategorik verileri önce dönüştür!
 le_gender = LabelEncoder()
@@ -122,10 +122,48 @@ if __name__ == "__main__":
     cm = confusion_matrix(y_test_final, y_pred)
     specificity = cm[0, 0] / (cm[0, 0] + cm[0, 1]) if cm[0, 0] + cm[0, 1] > 0 else 0
 
-    print("\n🎯 GERÇEK TEST SETİ METRİKLERİ:\n")
+    print("\n MLP Modeli (GA ile Seçilen Özelliklerle - 10 Katlı CV)\n")
     print(f"Accuracy:    {accuracy_score(y_test_final, y_pred):.4f}")
     print(f"Precision:   {precision_score(y_test_final, y_pred):.4f}")
     print(f"Recall:      {recall_score(y_test_final, y_pred):.4f}")
     print(f"Specificity: {specificity:.4f}")
     print(f"F1 Score:    {f1_score(y_test_final, y_pred):.4f}")
     print(f"MCC:         {matthews_corrcoef(y_test_final, y_pred):.4f}")
+
+
+    # Overfitting var mı yok mu anlamak için
+    y_train_pred = final_mlp.predict(X_train_selected)
+
+train_acc = accuracy_score(y_train_full, y_train_pred)
+train_prec = precision_score(y_train_full, y_train_pred)
+train_rec = recall_score(y_train_full, y_train_pred)
+train_f1 = f1_score(y_train_full, y_train_pred)
+train_mcc = matthews_corrcoef(y_train_full, y_train_pred)
+
+print("\nEğitim Verisindeki Performans:")
+print(f"Accuracy:  {train_acc:.4f}")
+print(f"Precision: {train_prec:.4f}")
+print(f"Recall:    {train_rec:.4f}")
+print(f"F1 Score:  {train_f1:.4f}")
+print(f"MCC:       {train_mcc:.4f}")
+
+
+"""
+
+MLP Modeli (GA ile Seçilen Özelliklerle - 10 Katlı CV)
+
+Accuracy:    0.9982
+Precision:   0.9965
+Recall:      1.0000
+Specificity: 0.9963
+F1 Score:    0.9982
+MCC:         0.9964
+
+Eğitim Verisindeki Performans:
+Accuracy:  0.9968
+Precision: 0.9936
+Recall:    1.0000
+F1 Score:  0.9968
+MCC:       0.9937
+
+"""
